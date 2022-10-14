@@ -12,7 +12,7 @@ namespace WindowsFormsApp13.Model
         public string PetrolName { get; set; }
         public double TotalLiter { get; set; }
         public double Payment { get; set; }
-        public DateTime DateTime { get; set; }
+        public DateTime DateTime { get; set; }=DateTime.Now;
 
         public override string ToString()
         {

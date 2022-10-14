@@ -16,6 +16,8 @@ namespace WindowsFormsApp13.View
        
         EventHandler<EventArgs> CheckClicked { get; set; }
         EventHandler<EventArgs> LoadClicked { get; set; }
+        EventHandler<EventArgs> PriceChanged { get;set; }
+        EventHandler<EventArgs> LiterChanged { get;set; }
         List<Petrol> Petrols { set; }
         List<Check>Checks { set; }
         string PriceText { get; set; }

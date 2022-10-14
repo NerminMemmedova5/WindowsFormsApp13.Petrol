@@ -41,6 +41,8 @@ namespace WindowsFormsApp13.View
         public string SumPrice { get => sumpriceTxtB.Text; set => sumpriceTxtB.Text=value; }
         public bool SetEnableMoney { get => moneyTxtB.Enabled; set => moneyTxtB.Enabled=value; }
         public bool SetEnableLiter { get => literTxtB.Enabled; set => literTxtB.Enabled=value; }
+        public EventHandler<EventArgs> PriceChanged { get; set; }
+        public EventHandler<EventArgs> LiterChanged { get; set; }
 
         private void HomeWindow_Load(object sender, EventArgs e)
         {
@@ -92,6 +94,17 @@ namespace WindowsFormsApp13.View
         private void loadBtn_Click(object sender, EventArgs e)
         {
             LoadClicked.Invoke(sender, e);
+        }
+
+        private void moneyTxtB_TextChanged(object sender, EventArgs e)
+        {
+            PriceChanged.Invoke(sender, e);
+        }
+
+        private void literTxtB_TextChanged(object sender, EventArgs e)
+        {
+
+            LiterChanged.Invoke(sender, e);
         }
     }
 }

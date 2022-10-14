@@ -54,27 +54,49 @@ namespace WindowsFormsApp13.Presenter
 
             _view.WindowLoad += WindowLoad;
             _view.PetrolChangeClicked += PetrolChangeClicked;
+            _view.PetrolChangeClicked += ViewLiterChanged;
             _view.MoneyChangeClicked += MoneyChangeClicked;
             _view.LiterChangeClicked += LiterChangeClicked;
-           
+
             _view.CheckClicked += CheckClicked;
             _view.LoadClicked += LoadClicked;
+
+            _view.LiterChanged += ViewLiterChanged;
+            _view.PriceChanged += ViewPriceChanged;
         }
 
+        private void ViewLiterChanged(object sender, EventArgs e)
+        {
+            try
+            {
 
+                var total = Convert.ToDouble(_view.LiterText) * Convert.ToDouble(_view.PriceText);
+
+                _view.SumPrice = total.ToString();
+            }
+            catch
+            {
+            }
+        }
+        private void ViewPriceChanged(object sender, EventArgs e)
+        {
+
+            _view.SumPrice = _view.MoneyText;
+        }
         private void WindowLoad(object sender, EventArgs e)
         {
             _view.Petrols = _db.Petrols.ToList();
         }
+        public Petrol SelectedPetrol { get; set; }
         private void PetrolChangeClicked(object sender, EventArgs e)
         {
-            var selecteditem = (sender as ComboBox).SelectedItem as Petrol;
-           
-            _view.PriceText = selecteditem.Price.ToString();
+            SelectedPetrol = (sender as ComboBox).SelectedItem as Petrol;
+
+            _view.PriceText = SelectedPetrol.Price.ToString();
         }
         private void MoneyChangeClicked(object sender, EventArgs e)
         {
-            _view.SetEnableMoney =! _view.SetEnableMoney;
+            _view.SetEnableMoney = !_view.SetEnableMoney;
         }
         private void LiterChangeClicked(object sender, EventArgs e)
         {
@@ -82,17 +104,25 @@ namespace WindowsFormsApp13.Presenter
         }
         private void CheckClicked(object sender, EventArgs e)
         {
-            
+            var check = new Check
+            {
+                PetrolName = SelectedPetrol.Name,
+                TotalLiter = Convert.ToDouble(_view.LiterText),
+                Payment = Convert.ToDouble(_view.SumPrice)
+            };
+            _db.Checks.Add(check);
+            _db.SaveChanges();
+            MessageBox.Show("Check Ugurla Elave Olundu");
+
 
         }
         private void LoadClicked(object sender, EventArgs e)
         {
-            var check = _db.Checks.ToList();
-            _view.Checks = check;
+            var checks = _db.Checks.ToList();
+            _view.Checks = checks;
         }
 
-        
+
 
     }
 }
- 

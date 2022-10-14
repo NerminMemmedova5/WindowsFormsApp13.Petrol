@@ -141,6 +141,7 @@
             this.moneyTxtB.Name = "moneyTxtB";
             this.moneyTxtB.Size = new System.Drawing.Size(177, 38);
             this.moneyTxtB.TabIndex = 4;
+            this.moneyTxtB.TextChanged += new System.EventHandler(this.moneyTxtB_TextChanged);
             // 
             // literTxtB
             // 
@@ -149,9 +150,11 @@
             this.literTxtB.Name = "literTxtB";
             this.literTxtB.Size = new System.Drawing.Size(177, 38);
             this.literTxtB.TabIndex = 4;
+            this.literTxtB.TextChanged += new System.EventHandler(this.literTxtB_TextChanged);
             // 
             // sumpriceTxtB
             // 
+            this.sumpriceTxtB.Enabled = false;
             this.sumpriceTxtB.Font = new System.Drawing.Font("Microsoft Sans Serif", 36F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.sumpriceTxtB.Location = new System.Drawing.Point(246, 448);
             this.sumpriceTxtB.Name = "sumpriceTxtB";
